@@ -37,4 +37,13 @@ describe('Method GET', function() {
         })
     })
   })
+
+  context('over /employee/{id} endpoint where id = 9999999', () => {
+    it('returns FALSE when a record does not exist', (done) => {
+      request
+      .get('/employee/9999999')
+      .expect(200)
+      .expect('false',done)
+    })
+  })
 })
