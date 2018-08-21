@@ -3,6 +3,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 chai.use(require('chai-arrays'))
+chai.use(require('chai-json'))
 
 describe('Method GET', function() {
   context('over /employees endpoint', function() {
@@ -21,6 +22,17 @@ describe('Method GET', function() {
           let data = result.text
           expect(data).to.be.array
           expect(data).is.not.empty
+          done()
+        })
+    })
+
+    it('returns JSON', function(done) {
+      request
+        .get('/employees')
+        .end(function (err, result) {
+          if (err) done(err)
+
+          expect(result).to.be.jsonObj
           done()
         })
     })
